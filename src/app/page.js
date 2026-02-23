@@ -22,20 +22,19 @@ export default function page() {
       const data = await response.json();
       console.log(data);
 
-      // if (data.role === "manager") {
-      //   router.replace("/dashboard");
-      // } else if (data.role === "shopkeeper") {
-      //   router.replace("/shop");
-      // }
+      if (data.role === "manager") {
+        router.replace("/dashboard");
+      } else if (data.role === "shopkeeper") {
+        router.replace("/shop");
+      }
     };
     getMe();
   }, [router]);
 
   //    login will NOT appear
-  // if (checkingAuth) {
-  //
-  //   return null;
-  // }
+  if (checkingAuth) {
+    return null;
+  }
 
   const handleLogin = async () => {
     console.log(username);
