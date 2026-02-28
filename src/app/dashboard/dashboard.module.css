@@ -1,0 +1,236 @@
+/* =====================
+   Dashboard Page Styles
+   ===================== */
+
+.page {
+  min-height: 100vh;
+  background-color: #050b14;
+  background-image: radial-gradient(
+    ellipse 70% 50% at 50% -5%,
+    rgba(0, 255, 156, 0.05) 0%,
+    transparent 70%
+  );
+}
+
+/* ---- Main Content ---- */
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+}
+
+/* ---- Welcome Banner ---- */
+
+.welcome {
+  margin-bottom: 36px;
+}
+
+.welcomeTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+
+.welcomeSub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
+/* ---- Stats Grid ---- */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background: rgba(8, 18, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.statCard:hover {
+  border-color: rgba(0, 255, 156, 0.2);
+  transform: translateY(-2px);
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.statIcon.green  { background: rgba(0, 255, 156, 0.1); }
+.statIcon.purple { background: rgba(124, 77, 255, 0.1); }
+.statIcon.blue   { background: rgba(56, 182, 255, 0.1); }
+.statIcon.orange { background: rgba(255, 159, 67, 0.1); }
+
+.statLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
+.statValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1;
+}
+
+.statBadge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(0, 255, 156, 0.08);
+  color: #00ff9c;
+  border: 1px solid rgba(0, 255, 156, 0.2);
+  width: fit-content;
+}
+
+/* ---- Bottom Grid ---- */
+
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Panel (shared) ---- */
+
+.panel {
+  background: rgba(8, 18, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.panelLink {
+  font-size: 12px;
+  color: #00ff9c;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.panelLink:hover {
+  color: #ffffff;
+}
+
+/* ---- Activity List ---- */
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.activityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.activityDot.green  { background: #00ff9c; box-shadow: 0 0 6px rgba(0,255,156,0.5); }
+.activityDot.purple { background: #a78bfa; box-shadow: 0 0 6px rgba(167,139,250,0.5); }
+.activityDot.blue   { background: #38b6ff; box-shadow: 0 0 6px rgba(56,182,255,0.5); }
+.activityDot.orange { background: #ff9f43; box-shadow: 0 0 6px rgba(255,159,67,0.5); }
+
+.activityText {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  flex: 1;
+}
+
+.activityTime {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+}
+
+/* ---- Quick Actions ---- */
+
+.actionList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actionBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.actionBtn:hover {
+  background: rgba(0, 255, 156, 0.06);
+  border-color: rgba(0, 255, 156, 0.2);
+  color: #ffffff;
+}
+
+.actionIcon {
+  font-size: 16px;
+  width: 24px;
+  text-align: center;
+}

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import styles from "./style/login.module.css";
 
 export default function page() {
   const router = useRouter();
@@ -11,9 +12,7 @@ export default function page() {
 
   useEffect(() => {
     const getMe = async () => {
-      const response = await fetch("/api/me", {
-        method: "GET",
-      });
+      const response = await fetch("/api/me", { method: "GET" });
 
       if (!response.ok) {
         setCheckingAuth(false);
@@ -22,33 +21,25 @@ export default function page() {
 
       const data = await response.json();
       console.log(data);
-
-      // 🔹 user already logged in → go to dashboard
       router.replace("/dashboard");
     };
 
     getMe();
   }, [router]);
 
-  //    login will NOT appear
-  if (checkingAuth) {
-    return null;
-  }
+  if (checkingAuth) return null;
 
-  const handleLogin = async () => {
-    console.log(username);
-    console.log(password);
-
-    setUsername("");
-    setPassword("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
     const response = await fetch("api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
+
+    setUsername("");
+    setPassword("");
 
     if (!response.ok) {
       alert("Please provide username and password");
@@ -57,56 +48,68 @@ export default function page() {
 
     const data = await response.json();
     console.log(data);
-
-    // 🔹 successful login → single redirect
     router.push("/dashboard");
   };
 
-  // const handleLogout = async () => {
-  //   const response = await fetch("api/logout", {
-  //     method: "POST",
-  //   });
-
-  //   if (response.ok) {
-  //     router.push("/");
-  //   }
-  // };
-
   return (
-    <>
-      <div className="loginPage flex flex-col items-right gap-4 p-4">
-        <label htmlFor="">Login</label>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        {/* Header */}
+        <div className={styles.header}>
+          <div className={styles.badge}>Secure Access</div>
+          <h1 className={styles.title}>Welcome back</h1>
+          <p className={styles.subtitle}>Sign in to your account to continue</p>
+        </div>
 
-        <label className="gap-2 flex">
-          <input
-            className="bg-violet-500"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <span>Username</span>
-        </label>
+        {/* Form */}
+        <form className={styles.form} onSubmit={handleLogin}>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="username">
+              Username
+            </label>
+            <input
+              id="username"
+              className={styles.input}
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
 
-        <label className="gap-2 flex">
-          <input
-            className="bg-violet-500"
-            type="text"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <span>Password</span>
-        </label>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              className={styles.input}
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <button onClick={handleLogin} className="loginButton bg-blue-500 w-fit">
-          Login
-        </button>
+          <button className={styles.button} type="submit">
+            Sign In
+          </button>
+        </form>
 
-        {/* <button onClick={handleLogout} className="loginButton">
-          Logout
-        </button> */}
+        {/* Footer */}
+        <div className={styles.divider}>
+          <span className={styles.dividerLine} />
+          <span className={styles.dividerText}>or</span>
+          <span className={styles.dividerLine} />
+        </div>
 
-        <Link href="/signup">Create Account</Link>
+        <p className={styles.footerText}>
+          Don&apos;t have an account?{" "}
+          <Link className={styles.link} href="/signup">
+            Create one
+          </Link>
+        </p>
       </div>
-    </>
+    </div>
   );
 }
