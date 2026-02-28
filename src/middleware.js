@@ -17,19 +17,10 @@ export async function middleware(request) {
     const { payload } = await jwtVerify(token, secret);
 
     console.log("Verified Payload:", payload);
-
-    console.log("Role:", payload.role);
     console.log("Path:", pathname);
 
-    if (pathname.startsWith("/dashboard") && payload.role !== "manager") {
-      console.log("Access denied to dashboard for role:", payload.role);
-      return NextResponse.redirect(new URL("/", request.url));
-    }
-
-    if (pathname.startsWith("/shop") && payload.role !== "shopkeeper") {
-      console.log("Access denied to shop for role:", payload.role);
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+    // 🔹 no role checks for now
+    // middleware only verifies authentication
 
     return NextResponse.next();
   } catch (error) {
@@ -40,5 +31,5 @@ export async function middleware(request) {
 
 // dont forget to export the config else it will work weirdlyW
 export const config = {
-  matcher: ["/dashboard/:path*", "/shop/:path*"],
+  matcher: ["/dashboard/:path*"],
 };
