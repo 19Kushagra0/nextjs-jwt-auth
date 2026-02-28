@@ -23,9 +23,12 @@ export async function GET() {
     // const verified = jwt.verify(token, "secretOrPrivateKey");
     // importing auth.js
     const verified = verifyToken(token);
+
     return Response.json({
       message: "user is authenticated",
-      role: verified.role,
+      // 🔹 no role check for now
+      // identity is enough
+      user: verified,
     });
   } catch (error) {
     return Response.json(

@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import { signToken } from "@/lib/auth";
 import { users } from "@/lib/users";
@@ -27,7 +26,8 @@ export async function POST(request) {
   // });
 
   // importing auth.js
-  const token = signToken({ username, role: user.role });
+  // 🔹 keep token payload minimal (no roles for now)
+  const token = signToken({ username });
 
   //   serialize(name, value, options) || (cookie template)
   const serialized = serialize("token", token, {
@@ -53,7 +53,7 @@ export async function POST(request) {
   // console.log(serialized);
 
   return Response.json(
-    { message: "go it", role: user.role },
+    { message: "Login successful" },
 
     // auto create cookie
     { headers: { "Set-Cookie": serialized } },
